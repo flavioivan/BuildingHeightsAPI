@@ -18,7 +18,7 @@ The current implementation runs some still limited input validation on POST. The
 
 ## Development
 
-Provided that Node.JS, Express, Joi, and lokijs are locally installed, run the application from the local folder by executing the following command (the application is listenning on port __3400__):
+Provided that __Node.JS__, __Express__, __Joi__, and __lokijs__ are locally installed, run the application from the local folder by executing the following command (the application is listenning on port __3400__):
 
 ```
 node .\index.js
@@ -26,7 +26,7 @@ node .\index.js
 
 ## Testing
 
-The API has been tested mostly with Postman.
+The API has been tested mostly with __Postman__.
 
 For example, testing the POST routing can be done as by the image below:
 ![image](https://user-images.githubusercontent.com/77120051/190004431-d2bb8987-a811-40da-b9e8-4a8b2e6cc252.png)
