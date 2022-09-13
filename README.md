@@ -29,6 +29,7 @@ node .\index.js
 The API has been tested mostly with Postman.
 
 For example, testing the POST routing can be done as by the image below:
+![image](https://user-images.githubusercontent.com/77120051/190004431-d2bb8987-a811-40da-b9e8-4a8b2e6cc252.png)
 
 In this case, the parameter sent was:
 
