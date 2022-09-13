@@ -79,6 +79,6 @@ Success code 200 is used when new building values is successfully inserted.
 
 Although lokijs seems to include support to transactions, that has not been implemeted on current version. 
 
-Eventually, updates on existing building heights should be implemented, and concurrency should also be added on both updates and insertions. A first approach to implement it should be by adding support to asynchronous entry proints on the API, and transactional operations on POST and PUT entry points.
+Eventually, updates on existing building heights should be implemented, and concurrency should also be added on both updates and insertions. A first approach to implement it should be by adding support to asynchronous entry proints to the API, and transactional operations on POST and PUT entry points.
 
 
