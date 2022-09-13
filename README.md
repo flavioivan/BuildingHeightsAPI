@@ -12,7 +12,7 @@ GET [`/api/building-heights`](http://localhost:3400/api/building-heights) (get a
 
 POST [`/api/building-heights/`](http://localhost:3400/api/building-heights) (expects _"building_limits"_ and a _"height_plateaus"_ __<GeoJSON>__ objects as inputs, and adds processed building limits into local database)
 
-DELETE [`/api/building-heights/:id](http://localhost:3400/api/building-heights/:10) (removeds the processed building limits whose __id__ is sent as parameter, if any)
+DELETE [`/api/building-heights/:id`](http://localhost:3400/api/building-heights/:10) (removeds the processed building limits whose __id__ is sent as parameter, if any)
 
 The current implementation runs some still limited input validation on POST. The logic to split building limits into different polygons is not completely implemented yet.
 
