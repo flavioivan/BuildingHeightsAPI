@@ -1,9 +1,9 @@
-const Joi = require('joi');  // For input validation
 const express = require('express');
 const router = express.Router();
 router.use(express.json());
 
 const db = require('./database.js');
+const inputValidation = require('./inputValidation.js');
 
 router.get('/building-heights', (req, res) => {
     try {
@@ -29,20 +29,11 @@ router.delete('/building-heights/:id', (req, res) => {
 
 router.post('/building-heights', (req, res) => {
 
-    try {
-        const schema = Joi.object({
-            building_limits: { type: Joi.string().required(), coordinates: Joi.any() },
-            height_plateaus: { type: Joi.string().required(), coordinates: Joi.any(), height: Joi.number().required() }
-        })
-        const validationResult = schema.validate(req.body);
-        if (!validationResult) {
-            res.status(400).send(validationResult.error.details[0].message);
-            return;
-        }
-    } catch (error) {
-        res.status(400).send(error.message);
+    const validationError = inputValidation(req.body);
+    if ( validationError != null) {
+        res.status(400).send(validationError);
+        return;
     }
-
 
     const buildingArea = {
         building_limits: req.body.building_limits,
