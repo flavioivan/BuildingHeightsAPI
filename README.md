@@ -2,9 +2,9 @@
 
 ### _Programmatic API aiming at splitting building limits into different plateau heights_
 
-The API in this project aims at dealing with _Building limits_ and _Height plateaus_. These are basically different polygons representing closed areas that can be built upon in a terrain, and the different heights of this same terrain. Although not entirely finished, the goal of this API is to split the building limits polygons into different polygons, with respective heights, according to the the heights for the different plateus in the terrain.
+The API in this project aims at dealing with _Building limits_ and _Height plateaus_. These are basically different polygons representing areas that can be built upon in a terrain, and the different heights of this same terrain. The goal of this API is to split the building limits polygons into different polygons, with respective heights, according to the the heights for the different plateus in the terrain.
 
-The API in this project was developed using __Node.JS__, __Express__, __Joi__ (for input validation), __lokijs__ for persistence, and __geojson-utils__ for working with __GeoJSON__ object types.
+The API in this project was developed using __Node.JS__, __Express__, __Joi__ (for input validation), __lokijs__ for persistence, and a series of packages for dealing with __GeoJSON__ object types and polygns (__geojson__, __geojson-utils__, __geojson-gemoetries-lookup__, __point-in-polygon__, __which-polygon__, etc.).
 
 ## API Documentation
 
@@ -26,10 +26,11 @@ node .\index.js
 
 ## Testing
 
-The API has been tested mostly with __Postman__.
+The API has been tested mostly manually with __Postman__.
 
 For example, testing the POST routing can be done as by the image below:
-![image](https://user-images.githubusercontent.com/77120051/190004431-d2bb8987-a811-40da-b9e8-4a8b2e6cc252.png)
+![image](https://user-images.githubusercontent.com/77120051/190922394-c37ee548-358d-45c1-a0c7-7a30718153f2.png)
+
 
 In this case, the parameter sent was:
 
@@ -38,36 +39,26 @@ In this case, the parameter sent was:
     "building_limits": {
         "type": "Polygon",
         "coordinates": [
-            [
-                [ 2.0, 2.0 ],
-                [ 8.0, 2.0 ],
-                [ 8.0, 8.0 ],
-                [ 2.0, 8.0 ],
-                [ 2.0, 2.0 ]
-            ]
+            [ [ 2.0, 2.0 ], [ 5.0, 2.0 ], [ 5.0, 5.0 ], [ 2.0, 5.0 ], [ 2.0, 2.0 ] ],
+            [ [ 55.0, 55.0 ], [ 80.0, 55.0 ], [ 80.0, 80.0 ], [ 55.0, 80.0 ], [ 55.0, 55.0 ] ]
         ]
     },
     "height_plateaus": {
         "type": "Polygon",
         "coordinates": [
-            [
-                [ 0.0, 0.0 ],
-                [ 100.0, 0.0 ],
-                [ 100.0, 100.0 ],
-                [ 0.0, 100.0 ],
-                [ 0.0, 0.0 ]
-            ]
+            [ [ 0.0, 0.0 ], [ 50.0, 0.0 ], [ 50.0, 50.0 ], [ 0.0, 50.0 ], [ 0.0, 0.0 ] ],
+            [ [ 50.0, 50.0 ], [ 100.0, 50.0 ], [ 100.0, 100.0 ], [ 50.0, 100.0 ], [ 50.0, 50.0 ] ]
         ],
-        "height": 50.0
+        "heights": [ 25.0, 75 ]
     }
 }
 ```
 
 ## Validation
 
-A simple version of input validation has been done by using __Joi__. For now, it checks if the input for data is respecting the format as described above.
+Input validation has been done by using __Joi__. It could be further extended by using some built-in GeoJson validation, in some of the packages used.
 
-Further validation should be implemented on the GeoJSON polygon objects, to verify if they are closed and properly oriented, for example.
+Further validation should verify if polygons are closed and properly oriented, for example.
 
 ## Error handling
 
@@ -77,8 +68,8 @@ Success code 200 is used when new building values is successfully inserted.
 
 ## Concurrency
 
-Although lokijs seems to include support to transactions, that has not been implemeted on current version. 
+Although lokijs apparently includes support to transactions, that has not been implemeted on current version just yet. 
 
-Eventually, updates on existing building heights should be implemented, and concurrency should also be added on both updates and insertions. A first approach to implement it should be by adding support to asynchronous entry proints to the API, and transactional operations on POST and PUT entry points.
+Eventually, updates on existing building heights should be implemented, and concurrency should be added on both updates and insertions. A first approach to implement it should be by adding support to asynchronous entry proints to the API, and transactional operations on POST and PUT entry points.
 
 
