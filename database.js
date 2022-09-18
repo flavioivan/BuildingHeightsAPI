@@ -8,7 +8,7 @@ var db = new loki('buildingHeights.db', {
     autosaveInterval: 4000
 });
 
-// initialize database, if empty from before
+// initialize database with an example of entry, if empty from before
 function databaseInitialize() {
     var entries = db.getCollection("buildingHeights");
     if (entries === null) {
@@ -19,40 +19,25 @@ function databaseInitialize() {
                 building_limits: {
                     "type": "Polygon",
                     "coordinates": [
-                        [
-                            [10.0, 10.0],
-                            [90.0, 10.0],
-                            [90.0, 90.0],
-                            [10.0, 90.0],
-                            [10.0, 10.0]
-                        ]
+                        [ [ 2.0, 2.0 ], [ 5.0, 2.0 ], [ 5.0, 5.0 ], [ 2.0, 5.0 ], [ 2.0, 2.0 ] ],
+                        [ [ 5.0, 5.0 ], [ 8.0, 5.0 ], [ 8.0, 8.0 ], [ 5.0, 8.0 ], [ 5.0, 5.0 ] ]
                     ]
                 },
                 height_plateaus: {
                     "type": "Polygon",
                     "coordinates": [
-                        [
-                            [0.0, 0.0],
-                            [100.0, 0.0],
-                            [100.0, 100.0],
-                            [0.0, 100.0],
-                            [0.0, 0.0]
-                        ]
+                            [ [ 0.0, 0.0 ], [ 50.0, 0.0 ], [ 50.0, 50.0 ], [ 0.0, 50.0 ], [ 0.0, 0.0 ] ],
+                            [ [ 50.0, 50.0 ], [ 100.0, 50.0 ], [ 100.0, 100.0 ], [ 50.0, 100.0 ], [ 50.0, 50.0 ] ]
                     ],
-                    "height": 50.0
+                    "heights": [ 25.0, 75 ]
                 },
                 building_with_plateaus: {
                     "type": "Polygon",
                     "coordinates": [
-                        [
-                            [10.0, 10.0],
-                            [90.0, 10.0],
-                            [90.0, 90.0],
-                            [10.0, 90.0],
-                            [10.0, 10.0]
-                        ]
+                        [ [ 2.0, 2.0 ], [ 5.0, 2.0 ], [ 5.0, 5.0 ], [ 2.0, 5.0 ], [ 2.0, 2.0 ] ],
+                        [ [ 5.0, 5.0 ], [ 8.0, 5.0 ], [ 8.0, 8.0 ], [ 5.0, 8.0 ], [ 5.0, 5.0 ] ]
                     ],
-                    "height": 50.0
+                    "heights": [ 25.0, 25.0 ]
                 }
             }
         );

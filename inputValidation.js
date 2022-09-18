@@ -4,7 +4,7 @@ const validate = (input) => {
     try {
         const schema = Joi.object({
             building_limits: { type: Joi.string().required(), coordinates: Joi.any() },
-            height_plateaus: { type: Joi.string().required(), coordinates: Joi.any(), height: Joi.number().required() }
+            height_plateaus: { type: Joi.string().required(), coordinates: Joi.any(), heights: Joi.any().required() }
         })
         const validationResult = schema.validate(input);
         if (validationResult.error != undefined) {

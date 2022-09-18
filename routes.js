@@ -4,6 +4,7 @@ router.use(express.json());
 
 const db = require('./database.js');
 const inputValidation = require('./inputValidation.js');
+const processPolygons = require('./processPolygons.js');
 
 router.get('/building-heights', (req, res) => {
     try {
@@ -35,14 +36,14 @@ router.post('/building-heights', (req, res) => {
         return;
     }
 
-    const buildingArea = {
-        building_limits: req.body.building_limits,
-        height_plateaus: req.body.height_plateaus,
-        building_with_plateaus: { type: "Polygon", coordinates: req.body.building_limits.coordinates, height: req.body.height_plateaus.height }
-    }
+    const buildingLimits = req.body.building_limits;
+    const heightPlateaus = req.body.height_plateaus;
+
+    //processPolygons.processPolygons(buildingLimits, heightPlateaus);
+    const processed = processPolygons.simpleProcessing(buildingLimits, heightPlateaus);
 
     const collection = db.getCollection('buildingHeights');
-    collection.insert(buildingArea);
+    collection.insert(processed);
 
     // success!
     res.sendStatus(200);
